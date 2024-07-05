@@ -5,7 +5,7 @@ import User  from '../models/UserSchema.js';
 export const authenticate = async(req, res, next) => {
     //get token from headers
     const authToken = req.headers.authorization;
-
+    console.log("authToken",authToken);
     //check if token exists
     if(!authToken || !authToken.startsWith('Bearer')){
         return res
@@ -15,7 +15,7 @@ export const authenticate = async(req, res, next) => {
 
     try{
         const token = authToken.split(" ")[1];
-
+        console.log("token",token);
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
 
         req.userId = decoded.id
